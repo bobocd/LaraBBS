@@ -14,7 +14,7 @@
 <div id="app" class="root-page">
   @include('layouts._header')
   <div class="container">
-    {{--@include('shared._messages')--}}
+    @include('shared._messages')
     @yield('content')
   </div>
   @include('layouts._footer')
