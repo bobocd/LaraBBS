@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Carbon\Carbon::setLocale('zh');
         //视图合成器
         \View::composer('layouts._header', function($view){
             $user = \Auth::user();
