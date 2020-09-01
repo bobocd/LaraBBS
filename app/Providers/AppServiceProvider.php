@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        if (app()->environment() == 'local' || app()->environment() == 'testing') {
+
+            $this->app->register(\Summerblue\Generator\GeneratorsServiceProvider::class);
+
+        }
     }
 
     /**
@@ -22,7 +26,10 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
+	{
+		\App\User::observe(\App\Observers\UserObserver::class);
+		\App\Models\Topic::observe(\App\Observers\TopicObserver::class);
+
         \Carbon\Carbon::setLocale('zh');
         //视图合成器
         \View::composer('layouts._header', function($view){
