@@ -74,7 +74,7 @@
       var editor = new Simditor({
         textarea: $('#editor'),
         upload: {
-          url: '',
+          url: '{{ route('topics.upload_image') }}',
           params: {
             _token: '{{ csrf_token() }}'
           },
