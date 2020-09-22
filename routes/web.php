@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Route::get('/',function (){
+////    echo e("<html>foo</html>");
+////});
 
 Route::get('/', 'PagesController@root')->name('root');
 
