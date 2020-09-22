@@ -78,6 +78,15 @@ return [
             // 图片上传必须设置图片存放路径
             'location' => public_path() . '/storage/images/avatars/'. date("Ym/d", time()).'/',
         ],
+        'roles' => [
+            'title'      => '用户角色',
+
+            // 指定数据的类型为关联模型
+            'type'       => 'relationship',
+
+            // 关联模型的字段，用来做关联显示
+            'name_field' => 'name',
+        ],
     ],
 
     // 『数据过滤』设置

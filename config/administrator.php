@@ -32,6 +32,8 @@ return array(
     'menu' => [
         '用户与权限' => [
             'users',
+            'roles',
+            'permissions',
         ],
     ],
     /*
@@ -42,8 +44,8 @@ return array(
     */
     'permission' => function () {
 // 只要是能管理内容的用户，就允许访问后台
-//        return Auth::check() && Auth::user()->can('manage_contents');
-        return true;
+        return Auth::check() && Auth::user()->can('manage_contents');
+//        return true;
     },
     /*
     * 使用布尔值来设定是否使用后台主页面。
