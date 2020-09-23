@@ -33,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
 		\App\User::observe(\App\Observers\UserObserver::class);
 		\App\Models\Topic::observe(\App\Observers\TopicObserver::class);
         \App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
+        \App\Models\Link::observe(\App\Observers\LinkObserver::class);
 
         \Carbon\Carbon::setLocale('zh');
         //视图合成器
