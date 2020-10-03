@@ -9,6 +9,7 @@ class PagesController extends Controller
 {
     public function root()
     {
+//        dd(\Auth::check());
         return view('pages.root');
     }
     public function permissionDenied()

@@ -6,18 +6,20 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
-use App\Models\Reply;
 use Auth;
 use Spatie\Permission\Traits\HasRoles;
-use App\Models\Traits\ActiveUserHelper;
+use App\Models\Traits;
 
 class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use MustVerifyEmailTrait,HasRoles;
-    use ActiveUserHelper;
+    use Traits\LastActivedAtHelper;
+    use Traits\ActiveUserHelper;
+    use HasRoles;
+    use MustVerifyEmailTrait;
     use Notifiable {
         notify as protected laravelNotify;
     }
+
     public function notify($instance)
     {
         // 如果要通知的人是当前用户，就不必通知了！
