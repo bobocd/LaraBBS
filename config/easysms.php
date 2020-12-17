@@ -19,9 +19,9 @@ return [
             'file' => '/tmp/easy-sms.log',
         ],
         'qcloud' => [
-            'sdk_app_id' => '1400458202', // SDK APP ID
-            'app_key' => '97ec00344bca9c323873c611f8d07f9f', // APP KEY
-            'sign_name' => '杨思雨学习记录', // 短信签名，如果使用默认签名，该字段可缺省（对应官方文档中的sign）
+            'sdk_app_id' => env('QCLOUD_APP_ID' , ''), // SDK APP ID
+            'app_key' => env('QCLOUD_APP_KEY' , ''), // APP KEY
+            'sign_name' => env('QCLOUD_SIGN_NAME' , ''), // 对应的是短信签名中的内容（非id）
         ],
     ],
 ];
