@@ -10,17 +10,17 @@ class VerificationCodesController extends Controller
 {
     public function store(VerificationCodeRequest $request,EasySms $easySms){
         $phone = $request->phone;
-        if (!app()->environment('production')) {
+        if (app()->environment('production')) {
             $code = '1234';
         } else {
-            // 生成4位随机数，左侧补0
-            $code = str_pad(random_int(1, 9999), 6, 0, STR_PAD_LEFT);
+            // 生成6位随机数，左侧补0
+            $code = str_pad(random_int(1, 999999), 6, 0, STR_PAD_LEFT);
             try {
                 $result = $easySms->send($phone, [
-                    'template' => 803992,
-                    'content' => "验证码为：{1}，您正在登录，若非本人操作，请勿泄露。",
+                    'template' => 800517,
+                    'content' => "您正在申请手机注册，验证码为：{1}，{2}分钟内有效！",
                     'data' => [
-                        $code,
+                        $code,'30'
                     ],
                 ]);
             }catch (\GuzzleHttp\Exception\ClientException $exception) {
@@ -30,7 +30,7 @@ class VerificationCodesController extends Controller
             }
             $key = 'verificationCode_'.str_random(15);
             $expiredAt = now()->addMinutes(10);
-            // 缓存验证码 10分钟过期。
+            // 缓存验证码 30分钟过期。
             \Cache::put($key, ['phone' => $phone, 'code' => $code], $expiredAt);
 
             return $this->response->array([
@@ -38,7 +38,7 @@ class VerificationCodesController extends Controller
                 'expired_at' => $expiredAt->toDateTimeString(),
             ])->setStatusCode(201);
         }
-        
+
 
     }
 }
