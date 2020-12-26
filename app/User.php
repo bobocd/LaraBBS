@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +11,8 @@ use Auth;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Traits;
 
-class User extends Authenticatable implements MustVerifyEmailContract
+
+class User extends Authenticatable implements JWTSubject
 {
     use Traits\LastActivedAtHelper;
     use Traits\ActiveUserHelper;
@@ -38,7 +40,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
      * @var array
      */
     protected $fillable = [
-        'name', 'email','phone', 'password','introduction','avatar',
+        'name', 'phone', 'email', 'password', 'introduction', 'avatar',
+        'weixin_openid', 'weixin_unionid'
     ];
 
     /**
@@ -95,5 +98,24 @@ class User extends Authenticatable implements MustVerifyEmailContract
             $path = config('app.url') . "/storage/images/avatars/".date("Ym/d", time())."/$path";
         }
         $this->attributes['avatar'] = $path;
+    }
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
