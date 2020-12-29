@@ -21,6 +21,7 @@
         "laravel/horizon": "~2.0",
         "laravel/tinker": "^1.0",
         "lcobucci/jwt": "3.3.3",
+        "liyu/dingo-serializer-switch": "^0.3.2",
         "mews/captcha": "^3.1",
         "mews/purifier": "3.2.3",
         "overtrue/easy-sms": "^1.2",
