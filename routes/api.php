@@ -30,7 +30,7 @@ $api = app('Dingo\Api\Routing\Router');
 #Accept: application/[配置项 standardsTree].[配置项 subtype].v2+json
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => 'serializer:array'
+    'middleware' => ['serializer:array','bindings']
 ],function($api){
     $api->group(
         [
@@ -40,8 +40,7 @@ $api->version('v1', [
         ],function($api) {
 
         // 短信验证码
-        $api->post('verificationCodes', 'VerificationCodesController@store')
-            ->name('api.verificationCodes.store');
+        $api->post('verificationCodes', 'VerificationCodesController@store')->name('api.verificationCodes.store');
         // 用户注册
         $api->post('users', 'UsersController@store')->name('api.users.store');
         // 图片验证码
@@ -50,8 +49,7 @@ $api->version('v1', [
         // 第三方登录
         $api->post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
             ->name('api.socials.authorizations.store');
-        $api->post('authorizations', 'AuthorizationsController@store')
-            ->name('api.authorizations.store');
+        $api->post('authorizations', 'AuthorizationsController@store')->name('api.authorizations.store');
         // 刷新token
         $api->put('authorizations/current', 'AuthorizationsController@update')
             ->name('api.authorizations.update');
@@ -80,6 +78,8 @@ $api->version('v1', [
             $api->post('images', 'ImagesController@store')->name('api.images.store');
             // 发布话题
             $api->post('topics', 'TopicsController@store')->name('api.topics.store');
+            //修改话题
+            $api->patch('topics/{topic}', 'TopicsController@update')->name('api.topics.update');
         });
         });
 

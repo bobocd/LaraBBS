@@ -41,5 +41,13 @@ class AppServiceProvider extends ServiceProvider
             $user = \Auth::user();
             $view->with('user', $user);
         });
+
+        \API::error(function (\Illuminate\Auth\Access\AuthorizationException $exception) {
+            abort(403, $exception->getMessage());
+        });
+
+        \API::error(function  (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException  $exception)  {
+            throw  new  \Symfony\Component\HttpKernel\Exception\HttpException(404,  '404 Not Found');
+        });
     }
 }
