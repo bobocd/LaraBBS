@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
+use App\User;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Transformers\TopicTransformer;
