@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Reply;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
